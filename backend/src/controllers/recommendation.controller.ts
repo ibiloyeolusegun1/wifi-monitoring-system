@@ -9,9 +9,9 @@ export async function generateNetworkRecommendations(
   res: Response,
 ): Promise<void> {
   try {
-    const { accessPointId } = req.params;
+    const accessPointId = req.params.accessPointId;
 
-    if (!accessPointId) {
+    if (typeof accessPointId !== "string" || !accessPointId) {
       res.status(400).json({
         success: false,
         message: "Access point ID is required.",
@@ -51,7 +51,7 @@ export async function generateNetworkRecommendations(
 
 export async function getNetworkRecommendations(
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<void> {
   try {
     const accessPointId =
@@ -59,18 +59,14 @@ export async function getNetworkRecommendations(
         ? req.query.accessPointId
         : undefined;
 
-    const recommendations =
-      await getRecommendations(accessPointId);
+    const recommendations = await getRecommendations(accessPointId);
 
     res.status(200).json({
       success: true,
       data: recommendations,
     });
   } catch (error) {
-    console.error(
-      "Get recommendations error:",
-      error
-    );
+    console.error("Get recommendations error:", error);
 
     res.status(500).json({
       success: false,
