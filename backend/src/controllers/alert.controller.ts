@@ -6,9 +6,9 @@ export async function generateNetworkAlerts(
   res: Response,
 ): Promise<void> {
   try {
-    const { accessPointId } = req.params;
+    const accessPointId = req.params.accessPointId;
 
-    if (!accessPointId) {
+    if (typeof accessPointId !== "string" || !accessPointId) {
       res.status(400).json({
         success: false,
         message: "Access point ID is required.",
