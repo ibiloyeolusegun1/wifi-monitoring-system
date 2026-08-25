@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Plus, Radio } from "lucide-react";
 import AdminLayout from "@/src/components/admin/AdminLayout";
@@ -19,7 +19,17 @@ import {
 
 import { Building, getBuildings } from "@/src/services/building.service";
 
+// Default export just wraps the real page in Suspense
 export default function AccessPointsPage() {
+  return (
+    <Suspense fallback={null}>
+      <AccessPointsPageContent />
+    </Suspense>
+  );
+}
+
+// Everything that was in your old component moves in here, unchanged
+function AccessPointsPageContent() {
   const searchParams = useSearchParams();
   const [accessPoints, setAccessPoints] = useState<AccessPoint[]>([]);
   const [buildings, setBuildings] = useState<Building[]>([]);
