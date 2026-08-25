@@ -19,7 +19,7 @@ import {
 
 import { Building, getBuildings } from "@/src/services/building.service";
 
-// Default export just wraps the real page in Suspense
+
 export default function AccessPointsPage() {
   return (
     <Suspense fallback={null}>

@@ -28,7 +28,6 @@ export default function BuildingsPage() {
   );
 }
 
-// Everything that was in your old component moves in here, unchanged
 function BuildingsPageContent() {
   const searchParams = useSearchParams();
   const [buildings, setBuildings] = useState<Building[]>([]);
